@@ -70,3 +70,31 @@ variable "indexing_max_segmentation_tokens_length" {
   type = number
 }
 
+# Upstash Redisy用
+variable "redis_host" {
+  type = string
+}
+
+variable "redis_port" {
+  type = number
+}
+
+variable "redis_username" {
+  type = string
+}
+
+variable "redis_password" {
+  type = string
+}
+
+variable "redis_use_ssl" {
+  type = bool
+}
+
+variable "mail_type" {
+  type = string
+}
+
+variable "resend_api_key" {
+  type = string
+}

@@ -21,8 +21,15 @@ module "cloudrun" {
   indexing_max_segmentation_tokens_length = var.indexing_max_segmentation_tokens_length
 
   vpc_network_name                           = module.network.vpc_network_name
-  redis_host                                 = module.redis.redis_host
-  redis_port                                 = module.redis.redis_port
+  # redis_host                                 = module.redis.redis_host
+  # redis_port                                 = module.redis.redis_port
+  redis_host                                 = var.redis_host
+  redis_port                                 = var.redis_port
+  redis_username                             = var.redis_username
+  redis_password                             = var.redis_password
+  redis_use_ssl                              = true
+  mail_type                                  = var.mail_type
+  resend_api_key                             = var.resend_api_key
   google_storage_service_account_json_base64 = module.storage.storage_admin_key_base64
   google_storage_bucket_name                 = module.storage.storage_bucket_name
 
@@ -39,14 +46,15 @@ module "cloudsql" {
   vpc_network_name = module.network.vpc_network_name
 }
 
-module "redis" {
-  source = "../../modules/redis"
+# GCP Redisは利用せず、Upstashのものを利用する
+# module "redis" {
+#   source = "../../modules/redis"
 
-  project_id = var.project_id
-  region     = var.region
+#   project_id = var.project_id
+#   region     = var.region
 
-  vpc_network_name = module.network.vpc_network_name
-}
+#   vpc_network_name = module.network.vpc_network_name
+# }
 
 module "network" {
   source = "../../modules/network"
